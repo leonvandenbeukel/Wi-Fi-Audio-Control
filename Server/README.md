@@ -7,4 +7,4 @@ Create a file in the same folder as this file with the name "Credentials.h" and 
 #define PW "your-ssid-password"
 ```
 
-Add the file "SigmaStudioFW.h" from your "C:\Program Files\Analog Devices\SigmaStudio 4.x" folder here also (overwrite the existing one with your latest version).
+Add the file "SigmaStudioFW.h" from your "C:\Program Files\Analog Devices\SigmaStudio 4.x" folder here also.
