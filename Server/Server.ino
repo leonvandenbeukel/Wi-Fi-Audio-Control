@@ -3,10 +3,6 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 #include "Credentials.h"
-
-// TODO: Create a file in the same folder as this file with the name "Credentials.h" and add and change the following code:
-// #define UN "your-ssid-username"
-// #define PW "your-ssid-password"
 const char *ssid = UN;
 const char *password = PW;
 
