@@ -1,6 +1,9 @@
 # Credentials
 Server/Credentials.h
 
+# Sigma Studio file
+Server/SigmaStudioFW.h
+
 # Prerequisites
 *.d
 
