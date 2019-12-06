@@ -6,6 +6,7 @@ Server/SigmaStudioFW.h
 
 # Sigma Studio output
 Sigma/output/
+Sigma/IC 1_Project/
 Server/Project*
 
 # Prerequisites
