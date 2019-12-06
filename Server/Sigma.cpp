@@ -12,7 +12,6 @@
 #define paramLength 4
 byte paramData[paramLength];
 
-
 // The adau program contains a stereo gain with a range from -60 dB to +6 dB: gainMin = 10^(-60/20) and gainMax = 10^(6/20)
 float gainMin = 0.0010000467300415;
 float gainMax = 1.99526226520538;
