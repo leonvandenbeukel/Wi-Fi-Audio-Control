@@ -8,7 +8,7 @@ The basic idea is to split one audio signal into two separate audio signals. Wit
 
 | Component                                     | Amount |
 | -                                             | -      |
-| ESP8266                                       | 2x     |
+| ESP8266 Wi-Fi module                          | 1x     |
 | ADAU1401 SigmaDSP 28-/56-Bit Audio Processor  | 1x     |
 | 3.5mm jack input connector                    | 3x     |
 
