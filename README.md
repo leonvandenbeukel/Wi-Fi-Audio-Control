@@ -49,7 +49,11 @@ But before opening the project you have to create a folder:
 You can use the buttons "Link Compile Download" and then "Export System Files" and then select the "Output" folder as destination. There is a post export command that copies the Project_IC* files to the Server folder. From the Arduino IDE these files are now included in the Arduino project. 
 
 
-Add the file "SigmaStudioFW.h" from your "C:\Program Files\Analog Devices\SigmaStudio 4.x" to the "Server" folder also. Because of copyright you are not allowed to distribute this file.
+Add the file:
+
+> SigmaStudioFW.h
+
+from your "C:\Program Files\Analog Devices\SigmaStudio 4.x" to the "Server" folder also. Because of copyright you are not allowed to distribute this file.
 
 
 ![alt text](https://github.com/leonvandenbeukel/Wi-Fi-Audio-Control/blob/master/Image/Sigma-schema.png)
