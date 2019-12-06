@@ -6,7 +6,7 @@ The basic idea is to split one audio signal into two separate audio signals. Wit
 
 ### Schema
 
-GPIO5 and GPIO4 are used for i2c (D1 and D2). For reference check: https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/
+GPIO5 and GPIO4 are used for i2c (D1 and D2). Check this [reference](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/) for more info.
 
 ### Sigma Studio
 
