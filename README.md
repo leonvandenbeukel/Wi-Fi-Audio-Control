@@ -38,6 +38,10 @@ GPIO5 and GPIO4 are used for i2c (D1 and D2). Check this [reference](https://ran
 
 ### Sigma Studio
 
-To use this project you have to install Sigma Studio 4.x. After installing Sigma Studio you can open the file \Sigma\Project.dspproj but before opening the project you have to create a folder "Output" in the Sigma folder. You can use the buttons "Link Compile Download" and then "Export System Files", then select the "Output" folder as destination. There is a post export command that copies the Project_IC* files to the Server folder. From the Arduino IDE these files are now included in the Arduino project.
+To use this project you have to install Sigma Studio 4.x. After installing Sigma Studio you can open the file \Sigma\Project.dspproj but before opening the project you have to create a folder "Output" in the Sigma folder. You can use the buttons "Link Compile Download" and then "Export System Files", then select the "Output" folder as destination. There is a post export command that copies the Project_IC* files to the Server folder. From the Arduino IDE these files are now included in the Arduino project. 
+
+
+Add the file "SigmaStudioFW.h" from your "C:\Program Files\Analog Devices\SigmaStudio 4.x" to the "Server" folder also. Because of copyright you are not allowed to distribute this file.
+
 
 ![alt text](https://github.com/leonvandenbeukel/Wi-Fi-Audio-Control/blob/master/Image/Sigma-schema.png)
