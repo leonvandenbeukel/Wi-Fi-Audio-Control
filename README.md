@@ -11,11 +11,23 @@ The basic idea is to split one audio signal into two separate audio signals. Wit
 | ESP8266 Wi-Fi module                          | 1x     |
 | ADAU1401 SigmaDSP 28-/56-Bit Audio Processor  | 1x     |
 | 3.5mm jack input connector                    | 3x     |
+| Micro USB breakout board                      | 1x     |
 
 
 ### Schema
 
-GPIO5 and GPIO4 are used for i2c (D1 and D2). Check this [reference](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/) for more info.
+GPIO5 and GPIO4 are used for i2c (D1 and D2). Check this [reference](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/) for more info. The USB Breakout board used as a power supply from a regular 5V phone charger or USB from a PC or laptop.
+
+| ADAU1401      | ESP8266    | Micro USB breakout board  | Jack In 1 | Jack Out 1 | Jack Out 2 |
+| -  | - | - | - | - | - |
+| +5V           |            | +5V                       | | | |
+| GND           | GND        | GND                       | | | |
+| SDA           | D2 (GPIO4) |                           | | | |
+| SCL           | D1 (GPIO5) |                           | | | |
+| In GND        |            |                           | GND | | |
+| In Left       |            |                           | In Left | | |
+| In Right      |            |                           | In Right | | |
+
 
 ### Sigma Studio
 
