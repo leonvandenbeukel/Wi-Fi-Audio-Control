@@ -6,11 +6,11 @@ The basic idea is to split one audio signal into two separate audio signals. Wit
 
 ### Components
 
-| Components                                    |    |
-| -------------                                 | -  |
-| ESP8266                                       | 2x |
-| ADAU1401 SigmaDSP 28-/56-Bit Audio Processor  | 1x |
-| 3.5mm jack input connector                    | 3x |
+| Component                                     | Amount |
+| -                                             | -      |
+| ESP8266                                       | 2x     |
+| ADAU1401 SigmaDSP 28-/56-Bit Audio Processor  | 1x     |
+| 3.5mm jack input connector                    | 3x     |
 
 
 ### Schema
