@@ -20,13 +20,20 @@ GPIO5 and GPIO4 are used for i2c (D1 and D2). Check this [reference](https://ran
 
 | ADAU1401      | ESP8266    | Micro USB breakout board  | Jack In 1 | Jack Out 1 | Jack Out 2 |
 | -  | - | - | - | - | - |
-| +5V           |            | +5V                       | | | |
-| GND           | GND        | GND                       | | | |
-| SDA           | D2 (GPIO4) |                           | | | |
-| SCL           | D1 (GPIO5) |                           | | | |
-| In GND        |            |                           | GND | | |
-| In Left       |            |                           | In Left | | |
-| In Right      |            |                           | In Right | | |
+| +5V           |            | +5V                       |           | | |
+| GND           | GND        | GND                       |           | | |
+| SDA           | D2 (GPIO4) |                           |           | | |
+| SCL           | D1 (GPIO5) |                           |           | | |
+| In GND        |            |                           | GND       | | |
+| In Left       |            |                           | In Left   | | |
+| In Right      |            |                           | In Right  | | |
+| Out 1 GND     |            |                           |           | Out 1 GND     | |
+| Out 1 Left    |            |                           |           | Out 1 Left    | |
+| Out 1 Right   |            |                           |           | Out 1 Right   | |
+| Out 2 GND     |            |                           |           | | Out 2 GND   |
+| Out 2 Left    |            |                           |           | | Out 2 Left  |
+| Out 2 Right   |            |                           |           | | Out 2 Right |
+
 
 
 ### Sigma Studio
