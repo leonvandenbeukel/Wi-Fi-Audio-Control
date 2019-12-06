@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio-Control.Android", "Audio-Control.Android\Audio-Control.Android.csproj", "{354F400F-52B6-4FDF-9C0C-E11E0CCD4E91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio-Control", "Audio-Control\Audio-Control.csproj", "{6AF136EE-9A46-40E2-A9CF-3B25BEE82571}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{354F400F-52B6-4FDF-9C0C-E11E0CCD4E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{354F400F-52B6-4FDF-9C0C-E11E0CCD4E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{354F400F-52B6-4FDF-9C0C-E11E0CCD4E91}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{354F400F-52B6-4FDF-9C0C-E11E0CCD4E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{354F400F-52B6-4FDF-9C0C-E11E0CCD4E91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{354F400F-52B6-4FDF-9C0C-E11E0CCD4E91}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6AF136EE-9A46-40E2-A9CF-3B25BEE82571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF136EE-9A46-40E2-A9CF-3B25BEE82571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF136EE-9A46-40E2-A9CF-3B25BEE82571}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6AF136EE-9A46-40E2-A9CF-3B25BEE82571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF136EE-9A46-40E2-A9CF-3B25BEE82571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF136EE-9A46-40E2-A9CF-3B25BEE82571}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9387A38-2BF8-40DD-94E4-E3C3D754758F}
+	EndGlobalSection
+EndGlobal
