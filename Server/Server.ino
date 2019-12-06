@@ -1,3 +1,10 @@
+/*
+ *  ESP8266 Wi-Fi Server that can receive http data and send it via i2c to the ADAU1401 audio processor
+ *  
+ *  Board: NodeMCU 1.0 (ESP-12E) / 115200 
+ *  
+ */
+#include <Wire.h>
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
@@ -8,36 +15,26 @@ const char *password = PW;
 
 ESP8266WebServer server(80);
 
+#include "Sigma.h"
+#include "Project_IC_1.h"
+#include "Project_IC_1_REG.h"
+#include "Project_IC_1_PARAM.h"
+
+#include "index.h"
+
 const int led = 13;
 
 void handleRoot() {
-  digitalWrite(led, 1);
-  char temp[400];
-  int sec = millis() / 1000;
-  int min = sec / 60;
-  int hr = min / 60;
+  String s = MAIN_page; 
+  server.send(200, "text/html", s); 
+}
 
-  snprintf(temp, 400,
-
-           "<html>\
-  <head>\
-    <meta http-equiv='refresh' content='5'/>\
-    <title>ESP8266 Demo</title>\
-    <style>\
-      body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
-    </style>\
-  </head>\
-  <body>\
-    <h1>Hello from ESP8266!</h1>\
-    <p>Uptime: %02d:%02d:%02d</p>\
-    <img src=\"/test.svg\" />\
-  </body>\
-</html>",
-
-           hr, min % 60, sec % 60
-          );
-  server.send(200, "text/html", temp);
-  digitalWrite(led, 0);
+void bassGain() {
+  writeSigmaRegister(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, server.arg(0));  // Left
+  writeSigmaRegister(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG1_GAIN1940ALGNS2_ADDR, server.arg(1));  // Right
+      
+  String message = "Bass gain changed.";
+  server.send(200, "text/plain", message);
 }
 
 void handleNotFound() {
@@ -60,9 +57,24 @@ void handleNotFound() {
 }
 
 void setup(void) {
+
+  Wire.begin();
+  Serial.begin(115200);
+  // On boot load program and parameter data to the ADAU
+  // Check the function "default_download_IC_1()" under in the (generated) "Project_IC_1.h". In this file the correct order is used.
+  Serial.println("Writing Core Register R0...");
+  Sigma_write_register( DEVICE_ADDR_IC_1, REG_COREREGISTER_IC_1_ADDR, REG_COREREGISTER_IC_1_BYTE, R0_COREREGISTER_IC_1_Default );
+  Serial.println("Writing Program data...");
+  Sigma_write_register_block( DEVICE_ADDR_IC_1, PROGRAM_ADDR_IC_1, PROGRAM_SIZE_IC_1, Program_Data_IC_1 );
+  Serial.println("Writing Parameter data...");
+  Sigma_write_register_block( DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1, PARAM_SIZE_IC_1, Param_Data_IC_1 );
+  Serial.println("Writing Core Register R3...");
+  Sigma_write_register( DEVICE_ADDR_IC_1, REG_COREREGISTER_IC_1_ADDR , R3_HWCONFIGURATION_IC_1_SIZE, R3_HWCONFIGURATION_IC_1_Default );
+  Serial.println("Writing Core Register R4...");
+  Sigma_write_register( DEVICE_ADDR_IC_1, REG_COREREGISTER_IC_1_ADDR, REG_COREREGISTER_IC_1_BYTE, R4_COREREGISTER_IC_1_Default );
+
   pinMode(led, OUTPUT);
   digitalWrite(led, 0);
-  Serial.begin(115200);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   Serial.println("");
@@ -84,10 +96,7 @@ void setup(void) {
   }
 
   server.on("/", handleRoot);
-  server.on("/test.svg", drawGraph);
-  server.on("/inline", []() {
-    server.send(200, "text/plain", "this works as well");
-  });
+  server.on("/bassGain", bassGain);
   server.onNotFound(handleNotFound);
   server.begin();
   Serial.println("HTTP server started");
@@ -96,22 +105,4 @@ void setup(void) {
 void loop(void) {
   server.handleClient();
   MDNS.update();
-}
-
-void drawGraph() {
-  String out = "";
-  char temp[100];
-  out += "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"400\" height=\"150\">\n";
-  out += "<rect width=\"400\" height=\"150\" fill=\"rgb(250, 230, 210)\" stroke-width=\"1\" stroke=\"rgb(0, 0, 0)\" />\n";
-  out += "<g stroke=\"black\">\n";
-  int y = rand() % 130;
-  for (int x = 10; x < 390; x += 10) {
-    int y2 = rand() % 130;
-    sprintf(temp, "<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" stroke-width=\"1\" />\n", x, 140 - y, x + 10, 140 - y2);
-    out += temp;
-    y = y2;
-  }
-  out += "</g>\n</svg>\n";
-
-  server.send(200, "image/svg+xml", out);
 }

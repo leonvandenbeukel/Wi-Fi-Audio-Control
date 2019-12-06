@@ -4,6 +4,10 @@ Server/Credentials.h
 # Sigma Studio file
 Server/SigmaStudioFW.h
 
+# Sigma Studio output
+Sigma/output/
+Server/Project*
+
 # Prerequisites
 *.d
 
@@ -36,3 +40,6 @@ Server/SigmaStudioFW.h
 *.exe
 *.out
 *.app
+
+# VS Code
+.vscode
