@@ -4,6 +4,15 @@
 
 The basic idea is to split one audio signal into two separate audio signals. With a (mobile) app you can control the audio signals. The left and right volume of the first audio signal can be controlled with sliders. The second audio signal can be contoller with a 6 band equalizer.
 
+### Components
+
+| Components                                    |    |
+| -------------                                 | -  |
+| ESP8266                                       | 2x |
+| ADAU1401 SigmaDSP 28-/56-Bit Audio Processor  | 1x |
+| 3.5mm jack input connector                    | 3x |
+
+
 ### Schema
 
 GPIO5 and GPIO4 are used for i2c (D1 and D2). Check this [reference](https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/) for more info.
