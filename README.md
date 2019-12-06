@@ -1,4 +1,4 @@
-# Wi-Fi-Audio-Control
+# Wi-Fi Audio Control
 
 ### Introduction
 
