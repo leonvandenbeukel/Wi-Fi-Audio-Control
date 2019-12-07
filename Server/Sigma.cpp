@@ -7,6 +7,7 @@
 
 #include "Arduino.h"
 #include <Wire.h>
+#include "Equalizer.h"
 
 // To change values of parameters in parameter data of the Adau1701 in runtime, see loop()
 #define paramLength 4
@@ -81,7 +82,7 @@ void Sigmastudiotype_fixpoint_convert( float value ) {
   paramData[0] = (paramValue >> 24) & 0xFF;
 }
 
-void writeSigmaRegister(byte devAddress, short address, String value) {
+void writeSigmaRegisterBassGain(byte devAddress, short address, String value) {
 
   int ival = value.toInt();
   long lval = map(ival, 0, 33, 1, 1995);
@@ -89,4 +90,15 @@ void writeSigmaRegister(byte devAddress, short address, String value) {
     
   Sigmastudiotype_fixpoint_convert(fval);
   Sigma_write_register(devAddress, address, paramLength, paramData);
+}
+
+void writeSigmaRegisterEQ(byte devAddress, short baseAddress, byte band, byte value) {
+
+  // TODO: Check baseAddress + band if it's the correct register
+  Sigma_write_register(devAddress, baseAddress + band + 0, 4, bands[band][value][0]);
+  Sigma_write_register(devAddress, baseAddress + band + 1, 4, bands[band][value][1]);
+  Sigma_write_register(devAddress, baseAddress + band + 2, 4, bands[band][value][2]);
+  Sigma_write_register(devAddress, baseAddress + band + 3, 4, bands[band][value][3]);
+  Sigma_write_register(devAddress, baseAddress + band + 4, 4, bands[band][value][4]);
+  
 }

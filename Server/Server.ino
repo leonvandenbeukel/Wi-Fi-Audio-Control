@@ -29,11 +29,26 @@ void handleRoot() {
   server.send(200, "text/html", s); 
 }
 
-void bassGain() {
-  writeSigmaRegister(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, server.arg(0));  // Left
-  writeSigmaRegister(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG1_GAIN1940ALGNS2_ADDR, server.arg(1));  // Right
+void handleBassGain() {
+  writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, server.arg(0));  // Left
+  writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG1_GAIN1940ALGNS2_ADDR, server.arg(1));  // Right
       
   String message = "Bass gain changed.";
+  server.send(200, "text/plain", message);
+}
+
+void handleEQ() {
+  byte band = server.arg(0).toInt();  // band: 0-5
+  byte eqval = server.arg(1).toInt(); // eqval: 0-21
+
+  Serial.print("EQ (band, value): ");
+  Serial.print(band);
+  Serial.print(", ");
+  Serial.println(eqval);  
+  
+  writeSigmaRegisterEQ(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MIDEQ1_ALG0_STAGE0_B0_ADDR, band, eqval);  // Base address for EQ is used
+
+  String message = "EQ changed"; 
   server.send(200, "text/plain", message);
 }
 
@@ -96,7 +111,8 @@ void setup(void) {
   }
 
   server.on("/", handleRoot);
-  server.on("/bassGain", bassGain);
+  server.on("/bassGain", handleBassGain);
+  server.on("/equalizer", handleEQ);  
   server.onNotFound(handleNotFound);
   server.begin();
   Serial.println("HTTP server started");

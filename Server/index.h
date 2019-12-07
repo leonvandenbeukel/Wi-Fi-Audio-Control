@@ -36,6 +36,20 @@ const char MAIN_page[] PROGMEM = R"=====(
             );
         }
 
+        function changeEq(slider){
+
+            $.post("/equalizer",
+                {
+                    band: 0,
+                    eqval: $('#eq1').val()
+                },
+                function (data, status) {
+                    console.log("Data: " + data + "\nStatus: " + status);
+                }
+            );         
+
+        }
+
     </script>
 
 </head>
@@ -55,9 +69,20 @@ const char MAIN_page[] PROGMEM = R"=====(
                 </div>
             </div>
         </div>
+
+        <br/>
+        <div class="card">
+            <div class="card-body custom-control custom-switch">
+                <h4 class="card-title">Equalizer</h4>
+
+                <div class="form-check-inline">
+                    <input type="range" name="eq1" id="eq1" min="0" max="20" value="9" onchange="changeEq(this);" class="custom-range">&nbsp;100&nbsp;hz
+                    
+                </div>
+            </div>
+        </div>
+
     </div>
-
 </body>
-
 </html>
 )=====";
