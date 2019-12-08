@@ -93,12 +93,11 @@ void writeSigmaRegisterBassGain(byte devAddress, short address, String value) {
 }
 
 void writeSigmaRegisterEQ(byte devAddress, short baseAddress, byte band, byte value) {
-
-  // TODO: Check baseAddress + band if it's the correct register
-  Sigma_write_register(devAddress, baseAddress + band + 0, 4, bands[band][value][0]);
-  Sigma_write_register(devAddress, baseAddress + band + 1, 4, bands[band][value][1]);
-  Sigma_write_register(devAddress, baseAddress + band + 2, 4, bands[band][value][2]);
-  Sigma_write_register(devAddress, baseAddress + band + 3, 4, bands[band][value][3]);
-  Sigma_write_register(devAddress, baseAddress + band + 4, 4, bands[band][value][4]);
+  
+  Sigma_write_register(devAddress, baseAddress + (band * 5) + 0, 4, bands[band][value][0]);
+  Sigma_write_register(devAddress, baseAddress + (band * 5) + 1, 4, bands[band][value][1]);
+  Sigma_write_register(devAddress, baseAddress + (band * 5) + 2, 4, bands[band][value][2]);
+  Sigma_write_register(devAddress, baseAddress + (band * 5) + 3, 4, bands[band][value][3]);
+  Sigma_write_register(devAddress, baseAddress + (band * 5) + 4, 4, bands[band][value][4]);
   
 }

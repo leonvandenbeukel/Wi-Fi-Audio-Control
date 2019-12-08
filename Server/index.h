@@ -36,17 +36,17 @@ const char MAIN_page[] PROGMEM = R"=====(
             );
         }
 
-        function changeEq(slider){
+        function changeEq(slider) {
 
             $.post("/equalizer",
                 {
-                    band: 0,
-                    eqval: $('#eq1').val()
+                    band: $(slider).attr("data-band"),
+                    eqval: $(slider).val()
                 },
                 function (data, status) {
                     console.log("Data: " + data + "\nStatus: " + status);
                 }
-            );         
+            );
 
         }
 
@@ -63,26 +63,31 @@ const char MAIN_page[] PROGMEM = R"=====(
                 <h4 class="card-title">Bass Control</h4>
 
                 <div class="form-check-inline">
-                    <input type="range" name="left" id="left" min="0" max="33" value="30" onchange="changeBassGain(this);" class="custom-range">&nbsp;
+                    <input type="range" name="left" id="left" min="0" max="33" value="30"
+                        onchange="changeBassGain(this);" class="custom-range">&nbsp;
                     <input type="checkbox" name="sync" id="sync" checked class="form-check-input">
-                    <input type="range" name="right" id="right" min="0" max="33" value="30" onchange="changeBassGain(this);" class="custom-range">
+                    <input type="range" name="right" id="right" min="0" max="33" value="30"
+                        onchange="changeBassGain(this);" class="custom-range">
                 </div>
             </div>
         </div>
 
-        <br/>
+        <br />
         <div class="card">
             <div class="card-body custom-control custom-switch">
                 <h4 class="card-title">Equalizer</h4>
 
-                <div class="form-check-inline">
-                    <input type="range" name="eq1" id="eq1" min="0" max="20" value="9" onchange="changeEq(this);" class="custom-range">&nbsp;100&nbsp;hz
-                    
-                </div>
+                    <input type="range" name="eq1" id="eq1" min="0" max="20" value="9" onchange="changeEq(this);"
+                        class="custom-range" data-band="0">&nbsp;100&nbsp;hz
+                    <input type="range" name="eq2" id="eq2" min="0" max="20" value="9" onchange="changeEq(this);"
+                        class="custom-range" data-band="1">&nbsp;500&nbsp;hz
+                
             </div>
         </div>
+    </div>
 
     </div>
 </body>
+
 </html>
 )=====";
