@@ -132,6 +132,8 @@ void setup(void) {
     if (b > 0)
       mem[i] = b;    
   } 
+  
+  Serial.println("Restoring memory settings...");
 
   // Set bass registers
   writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, String(mem[6]));  // Left
