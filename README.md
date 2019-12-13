@@ -57,3 +57,8 @@ from your "C:\Program Files\Analog Devices\SigmaStudio 4.x" to the "Server" fold
 
 
 ![alt text](https://github.com/leonvandenbeukel/Wi-Fi-Audio-Control/blob/master/Image/Sigma-schema.png)
+
+### Screenshot
+
+![alt text](https://github.com/leonvandenbeukel/Wi-Fi-Audio-Control/blob/master/Image/Mobile.png)
+
