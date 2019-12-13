@@ -1,31 +1,21 @@
 /*
  * Based on Martin van den Beukel's code to Boot Adau1701 via i2c from an Arduino Nano 5V 16MHz and send different parameters to the ADAU
- * 
- * This code also works for an ESP8266
- * 
+ * This also seems to works for ESP8266. Translated some comments to English and added writeSigmaRegisterBassGain and writeSigmaRegisterEQ
  */
-
 #include "Arduino.h"
 #include <Wire.h>
 #include "Equalizer.h"
-
-// To change values of parameters in parameter data of the Adau1701 in runtime, see loop()
 #define paramLength 4
 byte paramData[paramLength];
 
-// The adau program contains a stereo gain with a range from -60 dB to +6 dB: gainMin = 10^(-60/20) and gainMax = 10^(6/20)
-float gainMin = 0.0010000467300415;
-float gainMax = 1.99526226520538;
-
-// Implementation of the macro/function defined in "SigmaStudioFW.h" to write a memory block to the Adau1701 via i2c
 /*
- * De datatypes van de parameters zijn bepaald aan de hand van de header files uit SigmaStudio en 
- * de informatie op https://www.arduino.cc : - byte voor 8 bits en - short voor 16 bits.
+ * Implementation of the macro/function defined in "SigmaStudioFW.h" to write a memory block to the Adau1701 via i2c
+ * 
+ * Datatypes of the parameters are determined by the header files from SigmaStudio and info from https://www.arduino.cc: 
+ * - byte for 8 bits and - short for 16 bits.
  *
- * Zie http://www.audiodevelopers.com/5-the-microprocessor-how-to-control-the-dsp/ voor een voorbeeld.
- * 
- * Ik weet niet waarom, maar Wire.beginTranmission schuift het devAddress 1 bit naar links. Daarom eerst een keer naar rechts
- * 
+ * Check http://www.audiodevelopers.com/5-the-microprocessor-how-to-control-the-dsp/ for an example.
+ * Wire.beginTranmission shifts the devAddress 1 bit to the left. That's why shift 1 time to the right the first time
  */
 void Sigma_write_register_block(byte devAddress, short address, short dataLength, const byte *data ) {
   int dataType = 0;
