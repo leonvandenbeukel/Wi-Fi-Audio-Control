@@ -5,7 +5,7 @@
   The Tab Peaking - Low - High Shelf is used, settings:
   Boost min: -10, Boost Max: 10, Number of Steps: 21 (-10 to +10 and mind the 0 also counts)
   Frequencies: 100, 500, 1000, 2000, 5000, 8000
-  Q: 0.71
+  Q: 1.41
   Change Peaking, High Shelf and Low Shelf according to the settings of the frequency settings (click little symbol on top of the eq)
 
   When 'Show values' is checked and click 'Generate' you can see something like this:
