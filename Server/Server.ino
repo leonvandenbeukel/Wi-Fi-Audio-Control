@@ -124,11 +124,23 @@ void setup(void) {
   Serial.println("Writing Core Register R4...");
   Sigma_write_register( DEVICE_ADDR_IC_1, REG_COREREGISTER_IC_1_ADDR, REG_COREREGISTER_IC_1_BYTE, R4_COREREGISTER_IC_1_Default );
 
+  // Read 
   EEPROM.begin(sizeof(mem));
   for (byte i=0; i<sizeof(mem); i++) {
-    EEPROM.get(i, mem[i]);   
-    Serial.println(mem[i]); 
+    byte b = 0;
+    EEPROM.get(i, b);   
+    if (b > 0)
+      mem[i] = b;    
   } 
+
+  // Set bass registers
+  writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, String(mem[6]));  // Left
+  writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG1_GAIN1940ALGNS2_ADDR, String(mem[7]));  // Right
+
+  // Set eq registers
+  for (byte i=0; i<6; i++) {
+    writeSigmaRegisterEQ(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MIDEQ1_ALG0_STAGE0_B0_ADDR, i, mem[i]);  // Base address for EQ is used  
+  }
 
   pinMode(led, OUTPUT);
   digitalWrite(led, 0);
