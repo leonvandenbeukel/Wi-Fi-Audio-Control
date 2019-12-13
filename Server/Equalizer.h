@@ -27,6 +27,7 @@
  * 4  = 4 bytes has to be set to every register
  */
 
+// Copy this code to Equalizer.h
 byte bands[6][21][5][4] = 
 {
   {

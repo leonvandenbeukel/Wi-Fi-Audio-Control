@@ -1,8 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.IO;
 using System.Text;
-using System.Threading;
 
 namespace ImportEQ
 {
@@ -12,7 +9,9 @@ namespace ImportEQ
         {
             var path = $@"{Directory.GetCurrentDirectory()}\..\..\..\..\..\Server";
             var files = Directory.GetFiles(path, "*.hz");
-            var output = new StringBuilder($"byte bands[{files.Length}][21][5][4] = \r\n{{");
+            var output = new StringBuilder("// Copy this code to Equalizer.h");
+            output.AppendLine();
+            output.Append($"byte bands[{files.Length}][21][5][4] = \r\n{{");
 
             // Do some dirty string replacement hacks for each file
             foreach (var file in files)
@@ -39,11 +38,8 @@ namespace ImportEQ
                 var e = "\t{\r\n\t\t{\r\n\t\t\t{ " + d.Substring(0, d.Length - 4) + "\r\n\t}";
                 //File.WriteAllText(Path.Combine(path, "e.h"), e);
 
-
                 output.AppendLine();
-                //output.AppendLine("{");
                 output.AppendLine(e);
-                //output.AppendLine("},");
                 output.AppendLine(",");
             }
 

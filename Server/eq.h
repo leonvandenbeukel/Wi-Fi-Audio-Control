@@ -1,3 +1,4 @@
+// Copy this code to Equalizer.h
 byte bands[6][21][5][4] = 
 {
 	{
