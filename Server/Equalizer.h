@@ -1,5 +1,7 @@
 /*
-  Generated Fixed Point Table Generator (Menu Tools) in SigmaStudio and copied to this file
+  I've used the Fixed Point Table Generator (Menu Tools) in SigmaStudio, generated .hz file for each freq. and converted to 1 file 
+  with a c# tool and copied to this file
+  
   The Tab Peaking - Low - High Shelf is used, settings:
   Boost min: -10, Boost Max: 10, Number of Steps: 21 (-10 to +10 and mind the 0 also counts)
   Frequencies: 100, 500, 1000, 2000, 5000, 8000
