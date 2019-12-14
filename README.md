@@ -35,7 +35,7 @@ GPIO5 and GPIO4 are used for i2c (D1 and D2). Check this [reference](https://ran
 | Out 2 Left    |            |            |           | | Out 2 Left  |
 | Out 2 Right   |            |            |           | | Out 2 Right |
 
-Optionally connect a status LED to D5 (GPIO14) of the ESP8266.
+Optionally connect a status LED in series with a 220 ohm resistor to D5 (GPIO14) of the ESP8266 and to GND.
 
 ### Sigma Studio
 
