@@ -65,5 +65,7 @@ from your "C:\Program Files\Analog Devices\SigmaStudio 4.x" to the "Server" fold
 
 ### Prototype photo
 
-![alt text](https://github.com/leonvandenbeukel/Wi-Fi-Audio-Control/blob/master/Image/Prototype.jpg)
+<img src="https://github.com/leonvandenbeukel/Wi-Fi-Audio-Control/blob/master/Image/Prototype.jpg" width="600">
+
+
 
