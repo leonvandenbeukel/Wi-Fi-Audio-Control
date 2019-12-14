@@ -12,6 +12,7 @@ The basic idea is to split one audio signal into two separate audio signals. Wit
 | ADAU1401 SigmaDSP 28-/56-Bit Audio Processor  | 1x     |
 | 3.5mm jack input connector                    | 3x     |
 | Micro USB breakout board                      | 1x     |
+| Green 5mm LED (optional)                      | 1x     |
 
 
 ### Schema
@@ -34,7 +35,7 @@ GPIO5 and GPIO4 are used for i2c (D1 and D2). Check this [reference](https://ran
 | Out 2 Left    |            |            |           | | Out 2 Left  |
 | Out 2 Right   |            |            |           | | Out 2 Right |
 
-
+Optionally connect a status LED to D5 (GPIO14) of the ESP8266.
 
 ### Sigma Studio
 
