@@ -24,25 +24,31 @@ ESP8266WebServer server(80);
 
 #include "index.h"
 const int led = 13;
+const int statusLED = D5;
 
 // Memory settings for eqband0-5, bassleft, bassright (with default values)
 byte mem[8] = { 10, 10, 10, 10, 10, 10, 30, 30 };
 
 void handleRoot() {
+  digitalWrite(statusLED, HIGH);
   String s = MAIN_page; 
   server.send(200, "text/html", s); 
+  digitalWrite(statusLED, LOW);
 }
 
 void getEQ() {
+  digitalWrite(statusLED, HIGH);
   String message = "{\n";
   for (byte i=0; i<6; i++) {
     message += "\"band" + String(i) + "\":\"" + String(mem[i]) + "\"" + ((i<5) ? "," : "") + "\n";
   }  
   message += "}";
   server.send(200, "application/json; charset=utf-8", message);
+  digitalWrite(statusLED, LOW);
 }
 
 void setEQ() {
+  digitalWrite(statusLED, HIGH);
   byte band = server.arg(0).toInt();  // band: 0-5
   byte eqval = server.arg(1).toInt(); // eqval: 0-21
   EEPROM.put(band, eqval);
@@ -58,17 +64,21 @@ void setEQ() {
 
   String message = "EQ " + server.arg(0) + " changed"; 
   server.send(200, "text/plain", message);
+  digitalWrite(statusLED, LOW);  
 }
 
 void getBass() {
+  digitalWrite(statusLED, HIGH);
   String message = "{\n";
   message += "\"bassleft\":\"" + String(mem[6]) + "\",\n";
   message += "\"bassright\":\"" + String(mem[7]) + "\"\n";
   message += "}";
   server.send(200, "application/json; charset=utf-8", message);
+  digitalWrite(statusLED, LOW);
 }
 
 void setBass() {
+  digitalWrite(statusLED, HIGH);
   writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, server.arg(0));  // Left
   writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG1_GAIN1940ALGNS2_ADDR, server.arg(1));  // Right
 
@@ -85,6 +95,7 @@ void setBass() {
       
   String message = "Bass gain changed.";
   server.send(200, "text/plain", message);
+  digitalWrite(statusLED, LOW);  
 }
 
 void handleNotFound() {
@@ -145,16 +156,21 @@ void setup(void) {
   }
 
   pinMode(led, OUTPUT);
+  pinMode(statusLED, OUTPUT);
   digitalWrite(led, 0);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   Serial.println("");
+  bool LEDon = false;
 
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
+    LEDon = !LEDon;
+    digitalWrite(statusLED, LEDon);
   }
+  digitalWrite(statusLED, LOW);
 
   Serial.println("");
   Serial.print("Connected to ");
