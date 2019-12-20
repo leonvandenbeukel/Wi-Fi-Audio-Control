@@ -26,8 +26,8 @@ ESP8266WebServer server(80);
 const int led = 13;
 const int statusLED = D5;
 
-// Memory settings for eqband0-5, bassleft, bassright (with default values)
-byte mem[8] = { 10, 10, 10, 10, 10, 10, 30, 30 };
+// Memory settings for eqband0-9, bassleft, bassright (with default values)
+byte mem[12] = { 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 30, 30 };
 
 void handleRoot() {
   digitalWrite(statusLED, HIGH);
@@ -40,7 +40,8 @@ void getEQ() {
   digitalWrite(statusLED, HIGH);
   String message = "{\n";
   for (byte i=0; i<6; i++) {
-    message += "\"band" + String(i) + "\":\"" + String(mem[i]) + "\"" + ((i<5) ? "," : "") + "\n";
+    byte eqval = map(mem[i], 0, 48, -12, 12);
+    message += "\"band" + String(i) + "\":\"" + String(eqval) + "\"" + ((i<5) ? "," : "") + "\n";
   }  
   message += "}";
   server.send(200, "application/json; charset=utf-8", message);
@@ -49,8 +50,9 @@ void getEQ() {
 
 void setEQ() {
   digitalWrite(statusLED, HIGH);
-  byte band = server.arg(0).toInt();  // band: 0-5
-  byte eqval = server.arg(1).toInt(); // eqval: 0-21
+  byte band = server.arg(0).toInt();  // band: 0-9
+  byte eqvalArg = server.arg(1).toInt(); // eqval: -12 -- +12
+  byte eqval = map(eqvalArg, -12, 12, 0, 48);
   EEPROM.put(band, eqval);
   EEPROM.commit();
   mem[band] = eqval;

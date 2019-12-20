@@ -7,11 +7,12 @@ namespace ImportEQ
     {
         static void Main(string[] args)
         {
+            var minmaxvalues = 49; // Nr of values from min to max of each EQ band (-12 to +12, including 0, 0.5 per step)
             var path = $@"{Directory.GetCurrentDirectory()}\..\..\..\..\..\Server";
             var files = Directory.GetFiles(path, "*.hz");
             var output = new StringBuilder("// Copy this code to Equalizer.h");
             output.AppendLine();
-            output.Append($"byte bands[{files.Length}][21][5][4] = \r\n{{");
+            output.Append($"byte bands[{files.Length}][{minmaxvalues}][5][4] = \r\n{{");
 
             // Do some dirty string replacement hacks for each file
             foreach (var file in files)
