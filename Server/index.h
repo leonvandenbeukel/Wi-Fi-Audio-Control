@@ -61,6 +61,7 @@ const char MAIN_page[] PROGMEM = R"=====(
                         $('#eq2').val(parseFloat(data.band2));
                         $('#eq3').val(parseFloat(data.band3));
                         $('#eq4').val(parseFloat(data.band4));
+                        $('#eq5').val(parseFloat(data.band5));
                         $('#eq6').val(parseFloat(data.band6));
                         $('#eq7').val(parseFloat(data.band7));
                         $('#eq8').val(parseFloat(data.band8));
@@ -92,10 +93,10 @@ const char MAIN_page[] PROGMEM = R"=====(
                 <h4 class="card-title">Bass Control</h4>
 
                 <div class="form-check-inline">
-                    <input type="range" name="left" id="left" min="0" max="33" value="30"
+                    <input type="range" name="left" id="left" min="0" max="65" value="30"
                         onchange="changeBassGain(this);" class="custom-range">&nbsp;
                     <input type="checkbox" name="sync" id="sync" checked class="form-check-input">
-                    <input type="range" name="right" id="right" min="0" max="33" value="30"
+                    <input type="range" name="right" id="right" min="0" max="65" value="30"
                         onchange="changeBassGain(this);" class="custom-range">
                 </div>
             </div>
@@ -106,34 +107,34 @@ const char MAIN_page[] PROGMEM = R"=====(
             <div class="card-body custom-control custom-switch">
                 <h4 class="card-title">Equalizer</h4>
 
-                <input type="range" name="eq0" id="eq0" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq0" id="eq0" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="0">&nbsp;32&nbsp;hz
 
-                <input type="range" name="eq1" id="eq1" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq1" id="eq1" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="1">&nbsp;64&nbsp;hz
 
-                <input type="range" name="eq2" id="eq2" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq2" id="eq2" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="2">&nbsp;125&nbsp;hz
 
-                <input type="range" name="eq3" id="eq3" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq3" id="eq3" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="3">&nbsp;250&nbsp;hz
 
-                <input type="range" name="eq4" id="eq4" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq4" id="eq4" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="4">&nbsp;500&nbsp;hz
 
-                <input type="range" name="eq5" id="eq5" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq5" id="eq5" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="5">&nbsp;1k&nbsp;hz
 
-                <input type="range" name="eq6" id="eq6" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq6" id="eq6" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="6">&nbsp;2k&nbsp;hz
 
-                <input type="range" name="eq7" id="eq7" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq7" id="eq7" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="7">&nbsp;4k&nbsp;hz
 
-                <input type="range" name="eq8" id="eq8" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq8" id="eq8" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="8">&nbsp;8k&nbsp;hz
 
-                <input type="range" name="eq9" id="eq9" min="-12" max="12" value="0" step="0.5"
+                <input type="range" name="eq9" id="eq9" min="0" max="48" value="24" step="1"
                     onchange="changeEq(this);" class="custom-range" data-band="9">&nbsp;16k&nbsp;hz
 
             </div>

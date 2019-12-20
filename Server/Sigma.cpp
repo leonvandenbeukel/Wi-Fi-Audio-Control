@@ -75,7 +75,7 @@ void Sigmastudiotype_fixpoint_convert( float value ) {
 void writeSigmaRegisterBassGain(byte devAddress, short address, String value) {
 
   int ival = value.toInt();
-  long lval = map(ival, 0, 33, 1, 1995);
+  long lval = map(ival, 0, 65, 1, 1995);
   float fval = lval / 1000.0;
     
   Sigmastudiotype_fixpoint_convert(fval);

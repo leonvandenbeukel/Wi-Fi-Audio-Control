@@ -39,9 +39,8 @@ void handleRoot() {
 void getEQ() {
   digitalWrite(statusLED, HIGH);
   String message = "{\n";
-  for (byte i=0; i<6; i++) {
-    byte eqval = map(mem[i], 0, 48, -12, 12);
-    message += "\"band" + String(i) + "\":\"" + String(eqval) + "\"" + ((i<5) ? "," : "") + "\n";
+  for (byte i=0; i<10; i++) {
+    message += "\"band" + String(i) + "\":\"" + String(mem[i]) + "\"" + ((i<9) ? "," : "") + "\n";
   }  
   message += "}";
   server.send(200, "application/json; charset=utf-8", message);
@@ -51,8 +50,7 @@ void getEQ() {
 void setEQ() {
   digitalWrite(statusLED, HIGH);
   byte band = server.arg(0).toInt();  // band: 0-9
-  byte eqvalArg = server.arg(1).toInt(); // eqval: -12 -- +12
-  byte eqval = map(eqvalArg, -12, 12, 0, 48);
+  byte eqval = server.arg(1).toInt(); // eqval: 0-48
   EEPROM.put(band, eqval);
   EEPROM.commit();
   mem[band] = eqval;
@@ -64,7 +62,7 @@ void setEQ() {
   
   writeSigmaRegisterEQ(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MIDEQ1_ALG0_STAGE0_B0_ADDR, band, eqval);  // Base address for EQ is used
 
-  String message = "EQ " + server.arg(0) + " changed"; 
+  String message = "EQ " + String(band) + " changed to " + String(eqval); 
   server.send(200, "text/plain", message);
   digitalWrite(statusLED, LOW);  
 }
@@ -72,8 +70,8 @@ void setEQ() {
 void getBass() {
   digitalWrite(statusLED, HIGH);
   String message = "{\n";
-  message += "\"bassleft\":\"" + String(mem[6]) + "\",\n";
-  message += "\"bassright\":\"" + String(mem[7]) + "\"\n";
+  message += "\"bassleft\":\"" + String(mem[10]) + "\",\n";
+  message += "\"bassright\":\"" + String(mem[11]) + "\"\n";
   message += "}";
   server.send(200, "application/json; charset=utf-8", message);
   digitalWrite(statusLED, LOW);
@@ -84,18 +82,18 @@ void setBass() {
   writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, server.arg(0));  // Left
   writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG1_GAIN1940ALGNS2_ADDR, server.arg(1));  // Right
 
-  mem[6] = server.arg(0).toInt();
-  mem[7] = server.arg(1).toInt();
-  EEPROM.put(6, mem[6]);
-  EEPROM.put(7, mem[7]);
+  mem[10] = server.arg(0).toInt();
+  mem[11] = server.arg(1).toInt();
+  EEPROM.put(10, mem[10]);
+  EEPROM.put(11, mem[11]);
   EEPROM.commit();
 
   Serial.print("Bass gain changed: ");
-  Serial.print(mem[6]);
+  Serial.print(mem[10]);
   Serial.print(",");  
-  Serial.println(mem[7]);
+  Serial.println(mem[11]);
       
-  String message = "Bass gain changed.";
+  String message = "Bass gain (left/right) changed to " + String(mem[10]) + ", " + String(mem[11]);
   server.send(200, "text/plain", message);
   digitalWrite(statusLED, LOW);  
 }
@@ -149,11 +147,11 @@ void setup(void) {
   Serial.println("Restoring memory settings...");
 
   // Set bass registers
-  writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, String(mem[6]));  // Left
-  writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG1_GAIN1940ALGNS2_ADDR, String(mem[7]));  // Right
+  writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, String(mem[10]));  // Left
+  writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG1_GAIN1940ALGNS2_ADDR, String(mem[11]));  // Right
 
   // Set eq registers
-  for (byte i=0; i<6; i++) {
+  for (byte i=0; i<10; i++) {
     writeSigmaRegisterEQ(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MIDEQ1_ALG0_STAGE0_B0_ADDR, i, mem[i]);  // Base address for EQ is used  
   }
 
