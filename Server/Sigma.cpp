@@ -72,7 +72,30 @@ void Sigmastudiotype_fixpoint_convert( float value ) {
   paramData[0] = (paramValue >> 24) & 0xFF;
 }
 
+//bool isset = false;
 void writeSigmaRegisterBassGain(byte devAddress, short address, String value) {
+
+//  // Write the address to write to, to the ADAU1401 safe load address register (starting at 0x0815 to 0x0819 according to the datasheet)
+//  Sigmastudiotype_fixpoint_convert(address);
+//  Sigma_write_register(devAddress, 0x0815, paramLength, paramData);
+//
+//  // Then write the data to the ADAU1401 safe load data register (starting at 0x0810 to 0x0814 according to the datasheet)
+//  int ival = value.toInt();
+//  long lval = map(ival, 0, 65, 1, 1995);
+//  float fval = lval / 1000.0;    
+//  Sigmastudiotype_fixpoint_convert(fval);
+//  //Sigmastudiotype_fixpoint_convert(fval); 
+//  Sigma_write_register(devAddress, 0x0810, paramLength, paramData);
+//
+//  // Finally write transfer control bit to the core control register (register 0x081C bit D5 according to the datasheet)
+  //short IST = 1 << 5;
+//  short IST = 0 << 5;
+//  if (isset == false) {
+//    short IST = 30;
+//    Sigmastudiotype_fixpoint_convert(IST); 
+//    Sigma_write_register(devAddress, 0x081C, paramLength, paramData);    
+//    isset = true;
+//  }
 
   int ival = value.toInt();
   long lval = map(ival, 0, 65, 1, 1995);
@@ -80,10 +103,11 @@ void writeSigmaRegisterBassGain(byte devAddress, short address, String value) {
     
   Sigmastudiotype_fixpoint_convert(fval);
   Sigma_write_register(devAddress, address, paramLength, paramData);
+
 }
 
 void writeSigmaRegisterEQ(byte devAddress, short baseAddress, byte band, byte value) {
-  
+
   Sigma_write_register(devAddress, baseAddress + (band * 5) + 0, 4, bands[band][value][0]);
   Sigma_write_register(devAddress, baseAddress + (band * 5) + 1, 4, bands[band][value][1]);
   Sigma_write_register(devAddress, baseAddress + (band * 5) + 2, 4, bands[band][value][2]);
