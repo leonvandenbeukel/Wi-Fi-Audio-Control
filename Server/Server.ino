@@ -100,6 +100,7 @@ void setBass() {
  
   writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG0_GAIN1940ALGNS1_ADDR, String(mem[10]));  // Left
   writeSigmaRegisterBassGain(DEVICE_ADDR_IC_1, PARAM_ADDR_IC_1 + MOD_MULTIPLE1_ALG1_GAIN1940ALGNS2_ADDR, String(mem[11]));  // Right
+  //writeSigmaRegisterBassGainSafe(DEVICE_ADDR_IC_1, String(mem[10]));
   
   message = "Bass gain (left/right) changed to " + String(mem[10]) + ", " + String(mem[11]);
   Serial.println(message);
